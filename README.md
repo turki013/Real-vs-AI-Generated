@@ -65,8 +65,3 @@ The `tweets_dataset.csv` file should contain the following columns:
 * If the file is missing or corrupt, an appropriate error message will be shown.
 * Each generated chart is saved as a `.png` file in the project directory.
 
----
-
-## License
-
-This project is open-source and licensed under the [MIT License](LICENSE).
