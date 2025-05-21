@@ -3,6 +3,20 @@ import matplotlib.pyplot as plt
 
 
 def data():
+  """ Reads the dataset from a CSV file named 'tweets_dataset.csv'.
+
+    This function attempts to load the tweet dataset using pandas.
+    If the file is not found or any error occurs, it prints a friendly error message.
+    It also prints the first 10 rows for a quick preview and returns the full DataFrame
+    for further analysis and visualization.
+
+    Returns:
+        pd.DataFrame: A pandas DataFrame containing the tweet dataset with columns:
+                      'name', 'tweet', and 'is_real'.
+
+    Raises:
+        FileNotFoundError: If the CSV file is not found in the project directory.
+        Exception: If any other unexpected error occurs during file reading."""
   try:  
      df = pd.read_csv("tweets_dataset.csv")
      df.head(10)
@@ -15,31 +29,83 @@ def data():
       print("Done")    
     
 def bar_chart(df):
-   plt.title("Celebrity Tweets Dataset (Real vs AI-Generated) ")
-   plt.xlabel("name" , fontsize=14)
-   plt.ylabel("is  real" , fontsize=14)
+   """Displays a horizontal stacked bar chart of real vs AI-generated tweets for each celebrity.
+
+    This function uses the pandas groupby method to count how many tweets are real (`True`)
+    or AI-generated (`False`) per celebrity. It then uses matplotlib to display
+    a horizontal bar chart where each bar is stacked to compare the two categories visually.
+
+    Args:
+        df (pd.DataFrame): A DataFrame containing the tweet dataset, with at least two columns:
+                           'name' (celebrity name) and 'is_real' (boolean).
+
+    Output:
+        Saves the chart as 'tweets_bar.png' and displays it in a separate window."""
+         
    name = df["name"].tolist()
    is_real = df["is_real"].tolist()
+   grouped = df.groupby(["name","is_real"]).size().unstack(fill_value =0)
+   grouped.plot(kind='bar' , stacked=True)
+   plt.title("Celebrity Tweets Dataset (Real vs AI-Generated) ")
+   plt.xlabel("Celebrity" , fontsize=14)
+   plt.ylabel("Tweet Count" , fontsize=14)
+   plt.xticks(rotation=45)
+   plt.tight_layout()
+  
    plt.bar(name , is_real)
    plt.savefig("tweets_bar.png")
    plt.show()
    
 def scatter_chart(df):
-    plt.title("Celebrity Tweets Dataset (Real vs AI-Generated)")
-    plt.xlabel("name", fontsize=14)
-    plt.ylabel("is real" , fontsize=14)
+    """ Displays a scatter plot of all tweets colored by whether they're real or AI-generated.
+
+    Each point in the chart represents a single tweet.
+    The X-axis shows the celebrity name, and the Y-axis shows whether the tweet is real (1)
+    or AI-generated (0). The color of each point is determined by the 'is_real' value:
+    typically blue for AI-generated and red for real tweets using a 'coolwarm' color map.
+
+    Args:
+        df (pd.DataFrame): A DataFrame with 'name' and 'is_real' columns.
+
+    Output:
+        Saves the chart as 'tweets_scatter.png' and displays it in a separate window."""
+        
+    plt.figure(figsize=(12,6))
     name = df["name"].tolist()
     is_real = df["is_real"].tolist()
-    plt.scatter(name , is_real)
+    plt.title("Celebrity Tweets Dataset (Real vs AI-Generated)")
+    plt.xlabel("Celebrity", fontsize=14)
+    plt.ylabel("Tweet Count" , fontsize=14)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.yticks([0, 1], ['AI-Generated', 'Real'])
+    plt.scatter(name , is_real ,c=is_real, cmap='coolwarm')
     plt.savefig("tweets_scatter.png")
+    
     plt.show()
        
 def stem_chart(df):
+    """Displays a stem plot of tweets to visualize the real vs AI-generated status.
+
+    A stem plot shows vertical lines from a baseline (y=0 or y=1) to each data point.
+    This is useful for showing discrete data in a visual and minimal way.
+    The X-axis represents the celebrity name, and the Y-axis represents whether the tweet is real.
+
+    Args:
+        df (pd.DataFrame): The tweet dataset containing 'name' and 'is_real' columns.
+
+    Output:
+        Saves the chart as 'tweets_stem.png' and displays it in a separate window."""
+        
+    plt.figure(figsize=(12,6))
+    name = df["name"].tolist()
+    is_real = df["is_real"].tolist()
     plt.title("Celebrity Tweets Dataset (Real vs AI-Generated)") 
     plt.xlabel("name", fontsize=14)
     plt.ylabel("is real" , fontsize=14)
-    name = df["name"].tolist()
-    is_real = df["is_real"].tolist()
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.yticks([0, 1], ['AI-Generated', 'Real'])
     plt.stem(name , is_real)
     plt.savefig("tweets_stem.png")
     plt.show()  
