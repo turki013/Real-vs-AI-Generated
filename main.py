@@ -19,7 +19,6 @@ def data():
         Exception: If any other unexpected error occurs during file reading."""
   try:  
      df = pd.read_csv("tweets_dataset.csv")
-     df.head(10)
      return df
   except FileNotFoundError:
       print("Sorry file not found")
