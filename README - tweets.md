@@ -1,4 +1,4 @@
-﻿🐦 Celebrity Tweets Dataset (Real vs AI-Generated)
+# ﻿🐦 Celebrity Tweets Dataset (Real vs AI-Generated)
 
 
 This dataset contains 120 tweets from 8 well-known celebrities, a mix of real tweets and AI-generated imitations. Each tweet is labeled to support machine learning projects, particularly in the areas of text classification, stylistic analysis, and authorship prediction.
@@ -46,6 +46,7 @@ This dataset contains 120 tweets from 8 well-known celebrities, a mix of real tw
 ---
 
 
+
 🔁 Note on Duplicates
 
 
@@ -65,20 +66,5 @@ We applied controlled oversampling to ensure each celebrity had exactly 15 examp
 - This dataset was used in a hackathon project called TweetLike — a web app where you guess the celebrity based on a tweet and find out how AI can trick you.
 
 
----
 
 
-License
-
-
-MIT License — free to use, remix, and build on.
-
-
----
-
-
-Credits
-
-
-Created by Gor Abaghyan - https://www.kaggle.com/abaghyangor 
-Project repo: https://github.com/abaghyangor/ripgor
