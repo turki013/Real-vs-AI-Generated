@@ -4,6 +4,9 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-active-brightgreen)]()
 [![Made With](https://img.shields.io/badge/Made%20with-Pandas%20%26%20Matplotlib-orange)]()
+![Pandas](https://img.shields.io/badge/Pandas-✔️-150?style=flat-square&logo=pandas)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-📊-green?style=flat-square&logo=python)
+![CSV](https://img.shields.io/badge/Data%20Format-CSV-blue?style=flat-square&logo=files)
 
 A simple Python app that visualizes celebrity tweet data, comparing real tweets to AI-generated ones using charts. Built with `pandas` and `matplotlib`.
 
@@ -25,10 +28,13 @@ A simple Python app that visualizes celebrity tweet data, comparing real tweets 
 
 1. Make sure you have Python 3.10 or higher.
 2. Install required dependencies if needed.
+```bash
+git clone https://github.com/turki013/Real-vs-AI-Generated.git
+```
 3. Run the script:
 
 ```bash
-python filename.py
+python main.py
 ```
 
 4. Follow the menu to choose a chart type.
