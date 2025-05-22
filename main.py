@@ -42,17 +42,13 @@ def bar_chart(df):
     Output:
         Saves the chart as 'tweets_bar.png' and displays it in a separate window."""
          
-   name = df["name"].tolist()
-   is_real = df["is_real"].tolist()
    grouped = df.groupby(["name","is_real"]).size().unstack(fill_value =0)
    grouped.plot(kind='bar' , stacked=True)
    plt.title("Celebrity Tweets Dataset (Real vs AI-Generated) ")
    plt.xlabel("Celebrity" , fontsize=14)
-   plt.ylabel("Tweet Count" , fontsize=14)
+   plt.ylabel("Tweet Count " , fontsize=14)
    plt.xticks(rotation=45)
    plt.tight_layout()
-  
-   plt.bar(name , is_real)
    plt.savefig("tweets_bar.png")
    plt.show()
    
@@ -101,8 +97,8 @@ def stem_chart(df):
     name = df["name"].tolist()
     is_real = df["is_real"].tolist()
     plt.title("Celebrity Tweets Dataset (Real vs AI-Generated)") 
-    plt.xlabel("name", fontsize=14)
-    plt.ylabel("is real" , fontsize=14)
+    plt.xlabel("Celebrity", fontsize=14)
+    plt.ylabel("Tweet Count" , fontsize=14)
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.yticks([0, 1], ['AI-Generated', 'Real'])
