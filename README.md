@@ -39,21 +39,23 @@ python main.py
 
 4. Follow the menu to choose a chart type.
 
+![explain](assets/img/use_app.gif)
+
 ---
 
 ## Chart Examples
 
 ### Bar Chart
 
-![Bar Chart](tweets_bar.png)
+![Bar Chart](assets/img/tweets_bar.png)
 
 ### Scatter Plot
 
-![Scatter Plot](tweets_scatter.png)
+![Scatter Plot](assets/img/tweets_scatter.png)
 
 ### Stem Plot
 
-![Stem Plot](tweets_stem.png)
+![Stem Plot](assets/img/tweets_stem.png)
 
 ---
 
