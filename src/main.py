@@ -1,5 +1,6 @@
 import pandas as pd   
-import matplotlib.pyplot as plt                   
+import matplotlib.pyplot as plt  
+import config as cfg                 
 
 
 def data():
@@ -18,7 +19,7 @@ def data():
         FileNotFoundError: If the CSV file is not found in the project directory.
         Exception: If any other unexpected error occurs during file reading."""
   try:  
-     df = pd.read_csv("tweets_dataset.csv")
+     df = pd.read_csv("assets/Datasets/tweets_dataset.csv")
      return df
   except FileNotFoundError:
       print("Sorry file not found")
@@ -42,13 +43,19 @@ def bar_chart(df):
         Saves the chart as 'tweets_bar.png' and displays it in a separate window."""
          
    grouped = df.groupby(["name","is_real"]).size().unstack(fill_value =0)
-   grouped.plot(kind='bar' , stacked=True)
-   plt.title("Celebrity Tweets Dataset (Real vs AI-Generated) ")
+   colors = []
+   for col in grouped.columns:
+       if col == True:
+           colors.append(cfg.color_Real)
+       else:
+           colors.append(cfg.color_Ai)   
+   grouped.plot(kind='bar' , stacked=True , color = colors)
+   plt.title(cfg.title)
    plt.xlabel("Celebrity" , fontsize=14)
    plt.ylabel("Tweet Count " , fontsize=14)
    plt.xticks(rotation=45)
    plt.tight_layout()
-   plt.savefig("tweets_bar.png")
+   plt.savefig(cfg.filname_Bar)
    plt.show()
    
 def scatter_chart(df):
@@ -64,19 +71,24 @@ def scatter_chart(df):
 
     Output:
         Saves the chart as 'tweets_scatter.png' and displays it in a separate window."""
-        
-    plt.figure(figsize=(12,6))
+    colors = []
+    for col in df["is_real"]:
+        if col == True:
+            colors.append(cfg.color_Real)
+        else:
+            colors.append(cfg.color_Ai)
+                
+    plt.figure(figsize= cfg.figs_size)
     name = df["name"].tolist()
     is_real = df["is_real"].tolist()
-    plt.title("Celebrity Tweets Dataset (Real vs AI-Generated)")
+    plt.title(cfg.title)
     plt.xlabel("Celebrity", fontsize=14)
     plt.ylabel("Tweet Count" , fontsize=14)
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.yticks([0, 1], ['AI-Generated', 'Real'])
-    plt.scatter(name , is_real ,c=is_real, cmap='coolwarm')
-    plt.savefig("tweets_scatter.png")
-    
+    plt.scatter(name , is_real ,c=colors)
+    plt.savefig(cfg.filname_sctter)
     plt.show()
        
 def stem_chart(df):
@@ -91,18 +103,19 @@ def stem_chart(df):
 
     Output:
         Saves the chart as 'tweets_stem.png' and displays it in a separate window."""
-        
-    plt.figure(figsize=(12,6))
+    
+               
+    plt.figure(figsize= cfg.figs_size)
     name = df["name"].tolist()
     is_real = df["is_real"].tolist()
-    plt.title("Celebrity Tweets Dataset (Real vs AI-Generated)") 
+    plt.title(cfg.title) 
     plt.xlabel("Celebrity", fontsize=14)
     plt.ylabel("Tweet Count" , fontsize=14)
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.yticks([0, 1], ['AI-Generated', 'Real'])
     plt.stem(name , is_real)
-    plt.savefig("tweets_stem.png")
+    plt.savefig(cfg.filname_stem)
     plt.show()  
    
    
