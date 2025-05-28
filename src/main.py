@@ -27,7 +27,15 @@ def data():
       print(f"Error: something went wrong {e}") 
   finally:
       print("Done")    
+
+def setup_save_on_key(filename):
+    def on_key(event):
+      if event.key == 'S':
+          plt.savefig(filename)
+          print(f"📸 Snapshot saved! File: {filename}")
+    plt.gcf().canvas.mpl_connect('key_press_event', on_key)
     
+                
 def bar_chart(df):
    """Displays a horizontal stacked bar chart of real vs AI-generated tweets for each celebrity.
 
@@ -49,13 +57,14 @@ def bar_chart(df):
            colors.append(cfg.color_Real)
        else:
            colors.append(cfg.color_Ai)   
-   grouped.plot(kind='bar' , stacked=True , color = colors)
+   ax = grouped.plot(kind='bar' , stacked=True , color = colors)
+   ax.legend(["AI-Generated" , "Real"], title="Tweet Type")
    plt.title(cfg.title)
    plt.xlabel("Celebrity" , fontsize=14)
    plt.ylabel("Tweet Count " , fontsize=14)
    plt.xticks(rotation=45)
    plt.tight_layout()
-   plt.savefig(cfg.filname_Bar)
+   setup_save_on_key(cfg.filename_Bar)
    plt.show()
    
 def scatter_chart(df):
@@ -88,7 +97,7 @@ def scatter_chart(df):
     plt.tight_layout()
     plt.yticks([0, 1], ['AI-Generated', 'Real'])
     plt.scatter(name , is_real ,c=colors)
-    plt.savefig(cfg.filname_sctter)
+    setup_save_on_key(cfg.filename_scatter)
     plt.show()
        
 def stem_chart(df):
@@ -115,7 +124,7 @@ def stem_chart(df):
     plt.tight_layout()
     plt.yticks([0, 1], ['AI-Generated', 'Real'])
     plt.stem(name , is_real)
-    plt.savefig(cfg.filname_stem)
+    setup_save_on_key(cfg.filename_stem)
     plt.show()  
    
    
